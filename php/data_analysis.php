@@ -28,17 +28,55 @@ switch ($action) {
 }
 
 function fetchTotalSales($conn) {
-    $month = $_GET['month'] ?? DEFAULT_MONTH;
-    $year = $_GET['year'] ?? DEFAULT_YEAR;
+    if (isset($_GET['start_date']) && isset($_GET['end_date'])) {
+        $startDate = $_GET['start_date'];
+        $endDate = $_GET['end_date'];
 
-    $stmt = $conn->prepare("SELECT SUM(total_price) AS total_sales FROM orders WHERE MONTH(order_date) = ? AND YEAR(order_date) = ?");
-    $stmt->bind_param("ii", $month, $year);
-    $stmt->execute();
+        // Prepare the query with placeholders for the dates
+        $stmt = $conn->prepare("
+            SELECT SUM(total_price) AS total_sales
+            FROM orders
+            WHERE order_date BETWEEN ? AND ?
+        ");
+        
+        // Check if prepare was successful
+        if (!$stmt) {
+            echo json_encode(['success' => false, 'error' => $conn->error]);
+            return;
+        }
+
+        // Bind the parameters to the placeholders
+        $stmt->bind_param("ss", $startDate, $endDate);
+
+    } else {
+        // Prepare the query without the date filter
+        $stmt = $conn->prepare("
+            SELECT SUM(total_price) AS total_sales
+            FROM orders
+        ");
+        
+        // Check if prepare was successful
+        if (!$stmt) {
+            echo json_encode(['success' => false, 'error' => $conn->error]);
+            return;
+        }
+    }
+
+    // Execute the prepared statement
+    if (!$stmt->execute()) {
+        echo json_encode(['success' => false, 'error' => $stmt->error]);
+        return;
+    }
+
+    // Get the result
     $result = $stmt->get_result();
+    // Fetch the data
     $data = $result->fetch_assoc();
-
+    
+    // Return the response as JSON
     echo json_encode(['success' => true, 'data' => $data]);
 }
+
 
 function fetchTopSellingProducts($conn) {
     $stmt = $conn->prepare("SELECT product_name, SUM(quantity) AS total_quantity FROM order_details GROUP BY product_name ORDER BY total_quantity DESC LIMIT 5");
