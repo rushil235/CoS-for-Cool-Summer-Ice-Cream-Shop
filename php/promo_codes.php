@@ -1,19 +1,29 @@
 <?php
-include 'database.php';
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+// Replace with your RDS database credentials
+$servername = "csicg4.czptxhzjxjrt.us-east-1.rds.amazonaws.com";
+$username = "group4";
+$password = "Groupfour";
+$dbname = "ice_shop";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
 header('Content-Type: application/json');
 header("Cache-Control: no-cache, must-revalidate");  // Prevent caching
 header("Pragma: no-cache");
 header("Expires: 0");
 
-// Enable error reporting
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 
 
 $action = $_GET['action'] ?? '';
-$conn = getDatabaseConnection();
 
 try {
     if ($action === 'list') {
