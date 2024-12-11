@@ -47,7 +47,7 @@ body {
 
 .sidebar {
     background-color: #354f6a; /* Sidebar background color */
-    color: black; /* Text color */
+    color: white; /* Text color */
     padding: 20px; /* Padding for sidebar */
     width: 200px; /* Fixed width for sidebars */
 }
@@ -386,4 +386,26 @@ footer {
     border: 2px solid #ccc; /* Optional: Add a border */
     border-radius: 5px; /* Optional: Round the corners */
     box-sizing: border-box; /* Ensure padding and border are included in the size */
+}
+
+/* Default hyperlink color */
+a {
+    color: #f2f4f7; /* Replace with your desired color */
+    text-decoration: none; /* Removes underline, optional */
+}
+
+/* Hover effect for hyperlinks */
+a:hover {
+    color: #0056b3; /* Replace with a hover color, optional */
+    text-decoration: underline; /* Adds underline on hover, optional */
+}
+
+/* Ensure visited links retain the same color */
+a:visited {
+    color: #f2f4f7; /* Same as default color */
+}
+
+/* Active link style */
+a:active {
+    color: #0056b3; /* Replace with desired active color */
 }
