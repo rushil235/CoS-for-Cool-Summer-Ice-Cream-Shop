@@ -7,6 +7,7 @@ async function fetchOrderDetails() {
 
     try {
         const response = await fetch('../php/fetch_order.php?order_id=' + orderId);
+
         const order = await response.json();
 
         if (order && order.orderDetails && Array.isArray(order.orderDetails)) {
@@ -16,9 +17,9 @@ async function fetchOrderDetails() {
         }
     } catch (error) {
         console.error("Error fetching order details:", error);
-        alert("An error occurred while fetching the order details. Please try again.");
     }
 }
+
 
 function displayOrderDetails(order) {
     const orderInfo = document.getElementById('order-info');
