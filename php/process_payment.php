@@ -1,8 +1,9 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+ini_set('log_errors', 1);
+ini_set('error_log', '/var/www/html/php_errors.log'); // Set the path to your error log
+ini_set('display_errors', 0); // Disable error display
+
 
 session_start();
 include '../php/database.php';
