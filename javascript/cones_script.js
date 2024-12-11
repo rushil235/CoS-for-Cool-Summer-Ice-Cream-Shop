@@ -21,14 +21,16 @@ function displayProducts(filteredProducts) {
         
         // Ensure the path to the images is correct
         const imagePath = product.image_path.startsWith('./') ? product.image_path.slice(2) : product.image_path;
+
+        // Handle cases where toppings might be null or empty
+        const toppings = product.toppings ? product.toppings.split(', ') : [];
         
-        // Use the correct relative path to images
         productDiv.innerHTML = `
             <div class="image-checklist">
                 <!-- Correct image path with relative URL -->
                 <img src="../images/${imagePath}" alt="${product.name}" />
                 <div class="checklist">
-                    ${product.toppings.split(', ').map(topping => `<label><input type="checkbox" name="${product.name}-${topping}"> ${topping}</label><br>`).join('')}
+                    ${toppings.map(topping => `<label><input type="checkbox" name="${product.name}-${topping}"> ${topping}</label><br>`).join('')}
                 </div>
             </div>
             <h1>${product.name}</h1>
@@ -42,6 +44,7 @@ function displayProducts(filteredProducts) {
         container.appendChild(productDiv);
     });
 }
+
 
 
 
