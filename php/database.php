@@ -1,25 +1,21 @@
 <?php
-// Enable error reporting for debugging (optional, remove in production)
+// Enable error reporting for debugging
 ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Database configuration
-$servername = 'localhost';
-$username = 'root';
-$password = 'root';
-$dbname = 'ice_shop';
+// Replace with your RDS database credentials
+$servername = "csicg4.czptxhzjxjrt.us-east-1.rds.amazonaws.com";
+$username = "group4";
+$password = "Groupfour";
+$dbname = "ice_shop";
 
-// Create a database connection function
-function getDatabaseConnection() {
-    global $servername, $username, $password, $dbname;
-    $conn = new mysqli($servername, $username, $password, $dbname);
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Check for connection errors
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    return $conn;
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
+
+echo "Connected successfully!";
 ?>
