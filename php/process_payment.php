@@ -39,8 +39,6 @@ try {
     $orderId = intval($data['orderId']);
     $paymentAmount = floatval($data['paymentAmount']);
 
-    $conn = getDatabaseConnection();
-
     // Fetch the latest total price and amount paid
     $stmt = $conn->prepare("SELECT total_price, amount_paid FROM orders WHERE order_id = ?");
     $stmt->bind_param("i", $orderId);
