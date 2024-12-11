@@ -32,11 +32,6 @@ try {
     $totalPrice = floatval($data['totalPrice']);
     $orderId = intval($data['orderId']);
 
-    $conn = getDatabaseConnection();
-    if (!$conn) {
-        throw new Exception("Database connection failed.");
-    }
-
     // Check if the promo code is valid
     $stmt = $conn->prepare("SELECT discount_percentage FROM promotion_codes WHERE code = ? AND is_active = 1");
     $stmt->bind_param("s", $promoCode);
@@ -66,3 +61,5 @@ try {
 } catch (Exception $e) {
     echo json_encode(['success' => false, 'message' => $e->getMessage()]);
 }
+
+$conn->close();
