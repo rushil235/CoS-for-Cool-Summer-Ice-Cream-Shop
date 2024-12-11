@@ -58,7 +58,7 @@ error_reporting(E_ALL);
             }
 
             try {
-                const response = await fetch('../php/apply_promo_code.php?action=add', {
+                const response = await fetch('../php/promo_codes.php?action=add', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ code, discount })
@@ -89,7 +89,7 @@ error_reporting(E_ALL);
             }
 
             try {
-                const response = await fetch('../php/apply_promo_code.php?action=update', {
+                const response = await fetch('../php/promo_codes.php?action=update', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ id, code, discount })
@@ -112,7 +112,7 @@ error_reporting(E_ALL);
             if (!confirm('Are you sure you want to delete this promo code?')) return;
 
             try {
-                const response = await fetch(`../php/apply_promo_code.php?action=delete&id=${id}`, { method: 'DELETE' });
+                const response = await fetch(`../php/promo_codes.php?action=delete&id=${id}`, { method: 'DELETE' });
                 const result = await response.json();
 
                 if (result.success) {
