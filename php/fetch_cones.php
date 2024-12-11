@@ -18,13 +18,14 @@ if ($conn->connect_error) {
 }
 
 
-$sql = "SELECT p.product_id, p.product_name AS name, p.price, p.image_path, 
-               GROUP_CONCAT(t.topping_name SEPARATOR ', ') AS toppings
+$sql = "SELECT p.product_id, p.product_name AS name, p.price, p.image_path,
+               COALESCE(GROUP_CONCAT(t.topping_name SEPARATOR ', '), '') AS toppings
         FROM products p
         LEFT JOIN product_toppings pt ON p.product_id = pt.product_id
         LEFT JOIN toppings t ON pt.topping_id = t.topping_id
-       WHERE p.product_category = 'cones' 
+       WHERE p.product_category = 'cones'
         GROUP BY p.product_id";
+
 
 
 
