@@ -20,23 +20,22 @@ async function fetchOrderDetails() {
     }
 }
 
-
 function displayOrderDetails(order) {
     const orderInfo = document.getElementById('order-info');
     const totalPrice = parseFloat(order.total_price) || 0;
 
-    orderInfo.innerHTML = `
+    orderInfo.innerHTML = 
         <h2>Order #${order.order_id}</h2>
         <ul>
-            ${order.orderDetails.map(product => `
+            ${order.orderDetails.map(product => 
                 <li>
-                    <strong>${product.product_name}</strong> - ${product.quantity} pcs - $${product.price.toFixed(2)} each
+                    <strong>${product.product_name}</strong> - ${product.quantity} pcs - $${product.price} each
                     <p>Toppings: ${product.toppings || "None"}</p>
                 </li>
-            `).join('')}
+            ).join('')}
         </ul>
         <h3>Grand Total: $<span id="totalPrice">${totalPrice.toFixed(2)}</span></h3>
-    `;
+    ;
 
     document.getElementById('promo-section').style.display = 'block';
     document.getElementById('payment-section').style.display = 'none';
@@ -64,15 +63,15 @@ async function applyPromoCode() {
         if (result.success) {
             const discountedPrice = result.discountedPrice;
             document.getElementById('totalPrice').textContent = discountedPrice.toFixed(2);
-            alert(`Promo code applied! New Total: $${discountedPrice.toFixed(2)}`);
+            alert(Promo code applied! New Total: $${discountedPrice.toFixed(2)});
         } else {
             alert(result.message || "Failed to apply promo code.");
         }
     } catch (error) {
         console.error("Error applying promo code:", error);
-        alert("An error occurred while applying the promo code. Please try again.");
     }
 }
+
 
 function cancelPromoCode() {
     document.getElementById('promo-code').value = '';
@@ -100,17 +99,19 @@ async function makePayment() {
         const result = await response.json();
 
         if (result.success) {
-            document.getElementById('payment-info').innerHTML = `
+            document.getElementById('payment-info').innerHTML = 
                 <p>Change: $${result.change.toFixed(2)}</p>
+                
+
+                
                 <p>Status: ${result.paymentStatus}</p>
-            `;
+            ;
             document.getElementById('payment-info').style.display = 'block';
         } else {
             alert(result.message || "Error processing payment.");
         }
     } catch (error) {
         console.error("Error making payment:", error);
-        alert("An error occurred while processing the payment. Please try again.");
     }
 }
 
