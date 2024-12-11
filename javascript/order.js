@@ -24,18 +24,19 @@ function displayOrderDetails(order) {
     const orderInfo = document.getElementById('order-info');
     const totalPrice = parseFloat(order.total_price) || 0;
 
-    orderInfo.innerHTML = 
-        <h2>Order #${order.order_id}</h2>
-        <ul>
-            ${order.orderDetails.map(product => 
-                <li>
-                    <strong>${product.product_name}</strong> - ${product.quantity} pcs - $${product.price} each
-                    <p>Toppings: ${product.toppings || "None"}</p>
-                </li>
-            ).join('')}
-        </ul>
-        <h3>Grand Total: $<span id="totalPrice">${totalPrice.toFixed(2)}</span></h3>
-    ;
+    orderInfo.innerHTML = `
+    <h2>Order #${order.order_id}</h2>
+    <ul>
+        ${order.orderDetails.map(product => `
+            <li>
+                <strong>${product.product_name}</strong> - ${product.quantity} pcs - $${product.price} each
+                <p>Toppings: ${product.toppings || "None"}</p>
+            </li>
+        `).join('')}
+    </ul>
+    <h3>Grand Total: $<span id="totalPrice">${totalPrice.toFixed(2)}</span></h3>
+`;
+
 
     document.getElementById('promo-section').style.display = 'block';
     document.getElementById('payment-section').style.display = 'none';
