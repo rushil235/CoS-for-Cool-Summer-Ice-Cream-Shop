@@ -64,7 +64,7 @@ async function applyPromoCode() {
         if (result.success) {
             const discountedPrice = result.discountedPrice;
             document.getElementById('totalPrice').textContent = discountedPrice.toFixed(2);
-            alert(Promo code applied! New Total: $${discountedPrice.toFixed(2)});
+            alert(`Promo code applied! New Total: $${discountedPrice.toFixed(2)}`);
         } else {
             alert(result.message || "Failed to apply promo code.");
         }
