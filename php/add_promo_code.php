@@ -16,7 +16,7 @@ error_reporting(E_ALL);
     // Update the loadPromoCodes function to properly reflect status in the table
     async function loadPromoCodes() {
         try {
-            const response = await fetch('../php/apply_promo_code.php');
+            const response = await fetch('../php/promo_codes.php?action=list');
             const data = await response.json();
 
             if (data.success) {
