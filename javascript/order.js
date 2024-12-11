@@ -100,12 +100,12 @@ async function makePayment() {
         const result = await response.json();
 
         if (result.success) {
-            document.getElementById('payment-info').innerHTML = 
+            document.getElementById('payment-info').innerHTML = `
                 <p>Change: $${result.change.toFixed(2)}</p>
                 
 
                 
-                <p>Status: ${result.paymentStatus}</p>
+                <p>Status: ${result.paymentStatus}</p>`
             ;
             document.getElementById('payment-info').style.display = 'block';
         } else {
