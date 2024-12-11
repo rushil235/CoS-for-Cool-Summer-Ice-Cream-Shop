@@ -62,7 +62,7 @@ $toppings = $conn->query("SELECT * FROM toppings");
 <html>
 <head>
     <title>Admin Panel</title>
-    <link rel="stylesheet" href="../css/toppings.css">
+    <link rel="stylesheet" href="../css/admin.css">
 </head>
 <body>
     <div class="container">
