@@ -131,7 +131,7 @@ error_reporting(E_ALL);
             const newStatus = currentStatus ? 0 : 1;  // Toggle the status (1 -> 0 or 0 -> 1)
 
             try {
-                const response = await fetch('../php/apply_promo_code.php?action=toggle_status', {
+                const response = await fetch('../php/promo_codes.php?action=toggle_status', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ id, is_active: newStatus })
