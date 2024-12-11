@@ -7,7 +7,6 @@ async function fetchOrderDetails() {
 
     try {
         const response = await fetch('../php/fetch_order.php?order_id=' + orderId);
-
         const order = await response.json();
 
         if (order && order.orderDetails && Array.isArray(order.orderDetails)) {
@@ -17,6 +16,7 @@ async function fetchOrderDetails() {
         }
     } catch (error) {
         console.error("Error fetching order details:", error);
+        alert("An error occurred while fetching the order details. Please try again.");
     }
 }
 
@@ -29,7 +29,7 @@ function displayOrderDetails(order) {
         <ul>
             ${order.orderDetails.map(product => `
                 <li>
-                    <strong>${product.product_name}</strong> - ${product.quantity} pcs - $${product.price} each
+                    <strong>${product.product_name}</strong> - ${product.quantity} pcs - $${product.price.toFixed(2)} each
                     <p>Toppings: ${product.toppings || "None"}</p>
                 </li>
             `).join('')}
@@ -69,9 +69,9 @@ async function applyPromoCode() {
         }
     } catch (error) {
         console.error("Error applying promo code:", error);
+        alert("An error occurred while applying the promo code. Please try again.");
     }
 }
-
 
 function cancelPromoCode() {
     document.getElementById('promo-code').value = '';
@@ -101,9 +101,6 @@ async function makePayment() {
         if (result.success) {
             document.getElementById('payment-info').innerHTML = `
                 <p>Change: $${result.change.toFixed(2)}</p>
-                
-
-                
                 <p>Status: ${result.paymentStatus}</p>
             `;
             document.getElementById('payment-info').style.display = 'block';
@@ -112,8 +109,10 @@ async function makePayment() {
         }
     } catch (error) {
         console.error("Error making payment:", error);
+        alert("An error occurred while processing the payment. Please try again.");
     }
 }
+
 
 
 {/* <p>Remaining Balance: $${result.remainingBalance.toFixed(2)}</p> */}
