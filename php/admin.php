@@ -114,6 +114,8 @@ $categories = ['cones', 'Sundaes', 'Cakes', 'Shakes'];
     <link rel="stylesheet" href="../css/admin.css">
 </head>
 <body>
+    <h2><a href="../html/payment.html">Payments</a></h2>
+    <h2><a href="./html/index.html">Home</a></h2>
     <div class="container">
         <h2>Admin Panel - Manage Products</h2>
         <a href="add_promo_code.php">Manage Promo Codes</a>
