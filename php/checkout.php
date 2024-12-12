@@ -8,7 +8,7 @@
     </head>
     <body>
         <div class="menu">
-            <h2><a href="admin.html">Admin</a></h2>
+            <h2><a href="data_analysis.php">Admin</a></h2>
         </div>
 
         <header class="header">
